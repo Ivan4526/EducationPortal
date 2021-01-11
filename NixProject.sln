@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{97196461-01CF-4585-8365-10D8642B111A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NixProject", "NixProject\NixProject.csproj", "{F915F07F-568A-4C27-AB9C-251BDAD48B0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{97196461-01CF-4585-8365-10D8642B111A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97196461-01CF-4585-8365-10D8642B111A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97196461-01CF-4585-8365-10D8642B111A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F915F07F-568A-4C27-AB9C-251BDAD48B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F915F07F-568A-4C27-AB9C-251BDAD48B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F915F07F-568A-4C27-AB9C-251BDAD48B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F915F07F-568A-4C27-AB9C-251BDAD48B0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
