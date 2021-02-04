@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Models
 {
-    public class User : BaseEntity
+    public class Course : BaseEntity
     {
         public string Name { get; set; }
-        public string Password { get; set; }
-        public Role Role { get; set; }
+        public string Description { get; set; }
         public List<Skill> Skills { get; set; }
+        public List<Material> Materials { get; set; }
     }
 }

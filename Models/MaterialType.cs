@@ -4,9 +4,10 @@ using System.Text;
 
 namespace Models
 {
-    public class Role : BaseEntity
+    public class MaterialType
     {
+        public int Id { get; set; }
         public string Name { get; set; }
-        public List<User> Users { get; set; }
+        public List<Material> Material { get; set; }
     }
 }

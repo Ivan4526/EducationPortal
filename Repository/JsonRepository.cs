@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Interfaces;
+using Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,47 +7,56 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class UserJsonRepository<T> : IRepository<T> where T : class
+    public class JsonRepository<T> : IRepository<T> where T : BaseEntity
     {
-        readonly string path = @"D:\json\Info.json";
+        readonly string path;
         List<T> entities = new List<T>();
-        public UserJsonRepository()
+        public JsonRepository(string path)
         {
-            //var logfile = File.ReadAllLines(path);
+            this.path = path;
             entities = new List<T>();
             var jsonData = File.ReadAllLines(path);
-            foreach(var json in jsonData)
+            foreach (var json in jsonData)
             {
                 entities.Add(JsonConvert.DeserializeObject<T>(json));
             }
         }
-        public void Create(T entity)
+        public async Task Create(T entity)
         {
             string jsonResult = JsonConvert.SerializeObject(entity);
             using (var stream = new FileStream(path, FileMode.Append, FileAccess.Write))
             {
-               using(var sw = new StreamWriter(stream))
+                using (var sw = new StreamWriter(stream))
                 {
                     sw.WriteLine(jsonResult);
                 }
             }
         }
-        public IEnumerable<T> ReadAll()
+        public async Task<IEnumerable<T>> ReadAll()
         {
             return entities;
         }
-        public T Read(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> ReadAll(Expression<Func<T, bool>> predicate)
+        {
+            return entities.Where(predicate.Compile());
+        }
+        public async Task<T> Read(Expression<Func<T, bool>> predicate)
         {
             return entities.FirstOrDefault(predicate.Compile());
         }
-        public void Update(T user)
+        public async Task<T> Read(int id)
+        {
+            return entities.FirstOrDefault(x => x.Id == id);
+        }
+        public async Task Update(T user)
         {
 
         }
-        public void Delete(T user)
+        public async Task Delete(int id)
         {
 
         }

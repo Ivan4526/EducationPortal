@@ -1,8 +1,11 @@
-﻿using Models;
+﻿using Interfaces;
+using Models;
 using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Service
 {
@@ -10,31 +13,47 @@ namespace Service
     {
         IRepository<User> repository;
         IPasswordHasher hasher;
+
         public UserService(IRepository<User> repository, IPasswordHasher hasher)
         {
             this.repository = repository;
             this.hasher = hasher;
         }
-        public void AddUser(User user)
+
+        public async Task CreateUser(User user)
         {
             user.Password = hasher.ComputeHash(user.Password);
-            repository.Create(user);
+            await repository.Create(user);
         }
-        public IEnumerable<User> GetAllUsers()
+
+        public async Task DeleteUser(int id)
         {
-            return repository.ReadAll();
+            await repository.Delete(id);
         }
-        public User GetUser(Func<User, bool> predicate)
+
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return repository.ReadAll().FirstOrDefault(predicate);
+            return await repository.ReadAll();
         }
-        public void UpdateUser(User user)
+
+        public async Task<IEnumerable<User>> GetAllUsers(Expression<Func<User, bool>> predicate)
         {
-            repository.Update(user);
+            return await repository.ReadAll();
         }
-        public void DeleteUser(User user)
+
+        public async Task<User> GetUser(Expression<Func<User, bool>> predicate)
         {
-            repository.Delete(user); 
+            return await repository.Read(predicate);
+        }
+
+        public async Task<User> GetUser(int id)
+        {
+            return await repository.Read(id);
+        }
+
+        public async Task UpdateUser(User user)
+        {
+            await repository.Update(user);
         }
     }
 }
