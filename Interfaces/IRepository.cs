@@ -15,5 +15,6 @@ namespace Interfaces
         Task<T> Read(int id);
         Task Update(T entity);
         Task Delete(int id);
+        Task Delete(T entity);
     }
 }
