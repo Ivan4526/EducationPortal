@@ -8,7 +8,7 @@ namespace Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Skill> Skills { get; set; }
-        public List<Material> Materials { get; set; }
+        public List<SkillCourses> SkillCourses { get; set; }
+        public List<MaterialCourses> MaterialCourses { get; set; }
     }
 }

@@ -9,7 +9,8 @@ namespace Models
         public Video Video { get;set; }
         public Book Book { get; set; }
         public Article Article { get; set; }
+        public int MaterialTypeId { get;set; }
         public MaterialType MaterialType { get; set; }
-        public List<Course> Courses { get; set; }
+        public List<MaterialCourses> MaterialCourses { get; set; }
     }
 }

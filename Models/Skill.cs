@@ -9,6 +9,6 @@ namespace Models
     {
         public string Name { get; set; }
         public int Level { get; set; }
-        public List<Course> Courses { get; set; }
+        public List<SkillCourses> SkillCourses { get; set; }
     }
 }
