@@ -60,5 +60,9 @@ namespace Repository
         {
 
         }
+        public async Task Delete(T entity)
+        {
+
+        }
     }
 }

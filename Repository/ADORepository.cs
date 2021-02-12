@@ -32,6 +32,11 @@ namespace Repository
             throw new NotImplementedException();
         }
 
+        public Task Delete(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<T> Read(Expression<Func<T, bool>> predicate)
         {
             throw new NotImplementedException();
