@@ -11,49 +11,64 @@ namespace Service
 {
     public class UserService : IUserService
     {
-        IRepository<User> repository;
+        IRepository<User> userRepository;
+        IRepository<Role> roleRepository;
+        IRepository<Course> courseRepository;
         IPasswordHasher hasher;
 
-        public UserService(IRepository<User> repository, IPasswordHasher hasher)
+        public UserService(IRepository<User> userRepository, IRepository<Role> roleRepository, IRepository<Course> courseRepository, IPasswordHasher hasher)
         {
-            this.repository = repository;
+            this.userRepository = userRepository;
+            this.roleRepository = roleRepository;
+            this.courseRepository = courseRepository;
             this.hasher = hasher;
         }
 
         public async Task CreateUser(User user)
         {
-            user.Password = hasher.ComputeHash(user.Password);
-            await repository.Create(user);
+            user.RoleId = 1;
+            user.Password = hasher.ComputeHash(user.Password);;
+            await userRepository.Create(user);
+            await userRepository.SaveChanges();
+            var role = await roleRepository.Read(r => r.Id == user.RoleId);
+            user.Role = role;
         }
 
         public async Task DeleteUser(int id)
         {
-            await repository.Delete(id);
-        }
-
-        public async Task<IEnumerable<User>> GetAllUsers()
-        {
-            return await repository.ReadAll();
+            await userRepository.Delete(id);
         }
 
         public async Task<IEnumerable<User>> GetAllUsers(Expression<Func<User, bool>> predicate)
         {
-            return await repository.ReadAll();
+            return await userRepository.ReadAll(predicate);
         }
 
-        public async Task<User> GetUser(Expression<Func<User, bool>> predicate)
+        public async Task<User> GetUser(User userData)
         {
-            return await repository.Read(predicate);
+            var user = await userRepository.Read(u => u.Email == userData.Email && u.Password == userData.Password);
+            var role = await roleRepository.Read(r => r.Id == user.RoleId);
+            user.Courses = user.Courses;//Lazy loading
+            user.Role = role;
+            return user;
         }
 
         public async Task<User> GetUser(int id)
         {
-            return await repository.Read(id);
+            var user = await userRepository.Read(u => u.Id == id);
+            var role = await roleRepository.Read(r => r.Id == user.RoleId);
+            user.Courses = user.Courses;//Lazy loading
+            user.Role = role;
+            return user;
         }
 
         public async Task UpdateUser(User user)
         {
-            await repository.Update(user);
+            await userRepository.Update(user);
+        }
+        public async Task SaveChanges()
+        {
+            await userRepository.SaveChanges();
         }
     }
 }
