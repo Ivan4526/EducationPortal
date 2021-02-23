@@ -11,7 +11,7 @@ namespace Interfaces
     {
         Task CreateCourse(Course entity);
         Task<IEnumerable<Course>> GetAllourses();
-        Task<Course> GetCourse(Expression<Func<Course, bool>> predicate);
+        Task<Course> GetCourse(Course course);
         Task<Course> GetCourse(int id);
         Task UpdateCourse(Course entity);
         Task DeleteCourse(int id);

@@ -16,5 +16,6 @@ namespace Interfaces
         Task Update(T entity);
         Task Delete(int id);
         Task Delete(T entity);
+        Task SaveChanges();
     }
 }
