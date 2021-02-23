@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Models
 {
-    public class MaterialType
+    public class MaterialType : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
-        public List<Material> Material { get; set; }
+        public virtual List<Material> Material { get; set; }
     }
 }

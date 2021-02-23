@@ -7,6 +7,7 @@ namespace Models
     public class Progress : BaseEntity
     {
         public int Percent { get; set; }
-        public List<ProgressCourses> ProgressCourses { get; set; }
+        public virtual List<Course> Courses { get; set; }
+       // public List<ProgressCourses> ProgressCourses { get; set; }
     }
 }

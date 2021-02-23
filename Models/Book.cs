@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Models
 {
-    public class Book
+    public class Book : BaseEntity
     {
-        public Material Material { get; set; }
+        public int MaterialId { get; set; }
+        public virtual Material Material { get; set; }
     }
 }
