@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\Interfaces.csproj", "{660FE849-F2C4-46D2-B374-1F1A564A3354}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Helpers\Helpers.csproj", "{3331E13E-7736-42F6-97BE-CC6EA77961F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NixWeb", "NixWeb\NixWeb.csproj", "{AAF27872-BD1E-4C18-A5D5-290CF2E8F3F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{660FE849-F2C4-46D2-B374-1F1A564A3354}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{660FE849-F2C4-46D2-B374-1F1A564A3354}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{660FE849-F2C4-46D2-B374-1F1A564A3354}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3331E13E-7736-42F6-97BE-CC6EA77961F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3331E13E-7736-42F6-97BE-CC6EA77961F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3331E13E-7736-42F6-97BE-CC6EA77961F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3331E13E-7736-42F6-97BE-CC6EA77961F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAF27872-BD1E-4C18-A5D5-290CF2E8F3F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAF27872-BD1E-4C18-A5D5-290CF2E8F3F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAF27872-BD1E-4C18-A5D5-290CF2E8F3F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAF27872-BD1E-4C18-A5D5-290CF2E8F3F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
