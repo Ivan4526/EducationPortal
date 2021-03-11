@@ -23,11 +23,21 @@ namespace Service
             this.courseRepository = courseRepository;
             this.hasher = hasher;
         }
+        public async Task<bool> IfUserExists(string email, string password)
+        {
+            var hashedPass = hasher.ComputeHash(password);
+            var user = await userRepository.Read(z => z.Email == email && z.Password == hashedPass);
+            if (user != null)
+            {
+                return true;
+            }
+            return false;
+        }
 
         public async Task CreateUser(User user)
         {
             user.RoleId = 1;
-            user.Password = hasher.ComputeHash(user.Password);;
+            user.Password = hasher.ComputeHash(user.Password);
             await userRepository.Create(user);
             await userRepository.SaveChanges();
             var role = await roleRepository.Read(r => r.Id == user.RoleId);
@@ -46,9 +56,10 @@ namespace Service
 
         public async Task<User> GetUser(User userData)
         {
-            var user = await userRepository.Read(u => u.Email == userData.Email && u.Password == userData.Password);
+            var hashedPass = hasher.ComputeHash(userData.Password);
+            var user = await userRepository.Read(u => u.Email == userData.Email && u.Password == hashedPass);
             var role = await roleRepository.Read(r => r.Id == user.RoleId);
-            user.Courses = user.Courses;//Lazy loading
+            //user.Courses = await courseRepository.Read(x => x.Id == user.Id, "Material");
             user.Role = role;
             return user;
         }
@@ -65,9 +76,6 @@ namespace Service
         public async Task UpdateUser(User user)
         {
             await userRepository.Update(user);
-        }
-        public async Task SaveChanges()
-        {
             await userRepository.SaveChanges();
         }
     }
