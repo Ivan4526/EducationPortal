@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Helpers\Helpers.csproj", "{3331E13E-7736-42F6-97BE-CC6EA77961F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NixWeb", "NixWeb\NixWeb.csproj", "{AAF27872-BD1E-4C18-A5D5-290CF2E8F3F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NixWeb", "NixWeb\NixWeb.csproj", "{AAF27872-BD1E-4C18-A5D5-290CF2E8F3F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

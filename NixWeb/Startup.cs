@@ -1,4 +1,8 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Helpers;
+using Helpers.ObjectMapers;
+using Helpers.Validators;
 using Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Models;
+using Models.UI;
+using ModelsUI;
 using Repository;
 using Service;
 using System;
@@ -38,9 +44,35 @@ namespace NixWeb
             services.AddScoped<IRepository<User>, EntityRepository<User>>();
             services.AddScoped<IRepository<Course>, EntityRepository<Course>>();
             services.AddScoped<IRepository<Role>, EntityRepository<Role>>();
+            services.AddScoped<IRepository<Material>, EntityRepository<Material>>();
+            services.AddScoped<IRepository<Video>, EntityRepository<Video>>();
+            services.AddScoped<IRepository<Article>, EntityRepository<Article>>();
+            services.AddScoped<IRepository<Book>, EntityRepository<Book>>();
+            services.AddScoped<IRepository<Skill>, EntityRepository<Skill>>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICourseService, CourseService>();
+            services.AddSingleton<Interfaces.IValidator<User>, UserValidator>();
+            services.AddSingleton<Interfaces.IValidator<CourseUI>, CourseValidator>();
+            services.AddSingleton<Interfaces.IValidator<BookUI>, BookValidator>();
+            services.AddSingleton<Interfaces.IValidator<ArticleUI>, ArticleValidator>();
+            services.AddSingleton<Interfaces.IValidator<VideoUI>, VideoValidator>();
             services.AddSingleton<IPasswordHasher, Helpers.MD5Hasher>();
+            services.AddSingleton<IMaper<List<string>, List<Author>>, ListString_ListAuthors_Maper>();
+            services.AddSingleton<IMaper<List<AuthorUI>, List<Author>>, ListAuthorUI_ListAuthor_Maper>();
+            services.AddSingleton<IMaper<VideoUI, Video>, VideoUI_Video_Maper>();
+            services.AddSingleton<IMaper<BookUI, Book>, BookUI_Book_Maper>();
+            services.AddSingleton<IMaper<ArticleUI, Article>, ArticleUI_Article_Maper>();
+            services.AddSingleton<IMaper<Video, VideoUI>, Video_VideoUI_Maper>();
+            services.AddSingleton<IMaper<Book, BookUI>, Book_BookUI_Maper>();
+            services.AddSingleton<IMaper<Article, ArticleUI>, Article_ArticleUI_Maper>();
+            services.AddSingleton<IMaper<CourseUI, Course>, CourseUI_Course_Maper>();
+            services.AddSingleton<IMaper<Course, CourseUI>, Course_CourseUI_Maper>();
+            services.AddSingleton<IMaper<List<Course>, List<CourseUI>>, ListCourse_ListCourseUI_Maper>();
+            services.AddSingleton<IMaper<List<Material>, List<VideoUI>>, ListMaterial_ListVideoUI_Maper>();
+            services.AddSingleton<IMaper<List<Material>, List<ArticleUI>>, ListMaterial_ListArticleUI_Maper>(); 
+            services.AddSingleton<IMaper<List<Material>, List<BookUI>>, ListMaterial_ListBookUI_Maper>();
+            services.AddSingleton<IMaper<Skill, SkillUI>, Skill_SkillUI_Maper>();
+            services.AddSingleton<IMaper<List<Skill>, List<SkillUI>>, ListSkill_ListSkillUI_Maper>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                      .AddJwtBearer(options =>
@@ -57,6 +89,15 @@ namespace NixWeb
                              ValidateIssuerSigningKey = true,
                          };
                      });
+
+            services.AddAuthorization(/*opt =>
+            {
+                opt.AddPolicy("Authorized", policy =>
+                {
+                    policy.RequireClaim("Role", "Default");
+                });
+            }*/); 
+
 
             services.AddControllers();
 
