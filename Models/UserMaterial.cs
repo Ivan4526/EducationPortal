@@ -4,11 +4,13 @@ using System.Text;
 
 namespace Models
 {
-    public class Article : BaseEntity
+    public class UserMaterial
     {
-        public DateTime PublishDate { get; set; }
-        public string URL { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
         public int MaterialId { get; set; }
         public virtual Material Material { get; set; }
+        public bool IsCompleted { get; set; }
+
     }
 }

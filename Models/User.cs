@@ -12,8 +12,9 @@ namespace Models
         public int RoleId { get; set; }
         public virtual Role Role { get; set; }
         //public List<UserSkills> UserSkills { get; set; }
-        public virtual List<Skill> Skills { get; set; }
+        public virtual List<SkillUser> SkillUsers { get; set; }
         public virtual List<Course> Courses { get; set; }
+        public virtual List<UserMaterial> UserMaterials { get; set; }
         //public List<UserCourses> UserCourses { get; set; }
     }
 }

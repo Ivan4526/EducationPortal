@@ -6,7 +6,10 @@ namespace Models
 {
     public class Video : BaseEntity
     {
-        public int MaterialId { get; set; }
+        public string Name { get; set; }
+        public int Duration { get; set; }
+        public string Quality { get; set; }
+        public int MaterialId { get; set; } 
         public virtual Material Material { get; set; }
     }
 }
