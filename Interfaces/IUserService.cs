@@ -15,6 +15,6 @@ namespace Interfaces
         Task<User> GetUser(int id);
         Task UpdateUser(User entity);
         Task DeleteUser(int id);
-        Task SaveChanges();
+        Task<bool> IfUserExists(string email, string password);
     }
 }
