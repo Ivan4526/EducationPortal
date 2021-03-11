@@ -1,10 +1,6 @@
 ﻿using Helpers.Mapers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Repository
 {
@@ -16,14 +12,15 @@ namespace Repository
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=PHONEWAVE\MSSQLSERVER01;Initial Catalog=NixDatabase; Integrated Security=True;");
+           
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<MaterialType>().HasData(new MaterialType { Id = 1, Name = "Video" }, new MaterialType { Id = 2, Name = "Article" }, new MaterialType{ Id = 3, Name = "Book"});
+            modelBuilder.Entity<Role>().HasData(new Role { Id = 1, Name = "Default" });
             base.OnModelCreating(modelBuilder);
-            //new UserMaper(modelBuilder);
-           // new RoleMaper(modelBuilder);
-            //new CourseMaper(modelBuilder);
+            new SkillUserMaper(modelBuilder);
+            new UserMaterialMaper(modelBuilder);
         }
     }
 }
